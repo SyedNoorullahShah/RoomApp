@@ -15,7 +15,6 @@ class Repository private constructor(private val personDao: PersonDao) {
     /*private val _personsList = MutableLiveData<List<PersonEntity>>()
     val personsList: LiveData<List<PersonEntity>>
         get() = _personsList
-
     */
 
     companion object {
@@ -30,9 +29,7 @@ class Repository private constructor(private val personDao: PersonDao) {
         private fun buildRepo(personDao: PersonDao): Repository = Repository(personDao)
     }
 
-
     fun getPersons(): LiveData<List<PersonEntity>> = personDao.getPersons()
-
 
     suspend fun addPerson(person: PersonEntity) {
         withContext(Dispatchers.IO) {

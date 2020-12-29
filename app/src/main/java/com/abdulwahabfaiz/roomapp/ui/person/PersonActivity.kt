@@ -26,8 +26,12 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
         super.onCreate(savedInstanceState)
         activityMainBinding = ActivityPersonBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
+
+
         setRecyclerview()
         setSearchViewListener()
+
+
         viewmodel =
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
                 PersonViewModel::class.java
@@ -35,6 +39,7 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
 
         viewmodel.personsList.observe(this) { persons ->
             personAdapter.submitList(persons)
+            personAdapter.fullList.addAll(persons)
         }
     }
 
@@ -46,15 +51,13 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-
-                viewmodel.getPersonsByName(newText)
-                return true
+                personAdapter.filter.filter(newText)
+                return false
             }
 
         })
 
     }
-
 
     private fun setRecyclerview() {
         personAdapter = PersonAdapter(this, layoutInflater)
@@ -75,7 +78,7 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
     }
 
     override fun addUpdatePerson(a: Actions, name: String, id: Int) {
-        if (a.name.equals(Actions.ACTION_ADD.name)) {
+        if (a.name == Actions.ACTION_ADD.name) {
             viewmodel.addPerson(PersonEntity(name))
         } else {
             viewmodel.update(name, id)

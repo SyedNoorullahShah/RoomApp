@@ -13,21 +13,7 @@ import kotlinx.coroutines.launch
 class PersonViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repo: Repository = Repository.getInstance(application.applicationContext)
-    private val dbPersonsList: LiveData<List<PersonEntity>> = repo.getPersons()
-    val personsList = MediatorLiveData<List<PersonEntity>>()
-    private lateinit var persons: List<PersonEntity>
-    private var isFilterOn: Boolean = false
-
-    init {
-        personsList.addSource(dbPersonsList) {
-            it?.let {
-                if (!isFilterOn) {
-                    personsList.value = it
-                    persons = it
-                }
-            }
-        }
-    }
+    val personsList: LiveData<List<PersonEntity>> = repo.getPersons()
 
     fun addPerson(person: PersonEntity) {
         viewModelScope.launch {
@@ -41,6 +27,7 @@ class PersonViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+/*
     fun getPersonsByName(name: String?) {
         if (name.isNullOrEmpty()) {
             resetList()
@@ -51,6 +38,8 @@ class PersonViewModel(application: Application) : AndroidViewModel(application) 
             personsList.value = getListByName(name, it)
         }
     }
+
+
 
     private fun getListByName(name: String, list: List<PersonEntity>): List<PersonEntity>? {
         isFilterOn = true
@@ -63,6 +52,7 @@ class PersonViewModel(application: Application) : AndroidViewModel(application) 
         isFilterOn = false
         personsList.value = persons
     }
+*/
 
     fun update(name: String, id: Int) {
         viewModelScope.launch {
