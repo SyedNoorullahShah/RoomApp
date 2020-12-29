@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp.ui.adapters
+package com.abdulwahabfaiz.roomapp.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.abdulwahabfaiz.roomapp.database.PersonEntity
 import com.abdulwahabfaiz.roomapp.databinding.PersonItemBinding
-import com.abdulwahabfaiz.roomapp.enums.Actions
+import com.abdulwahabfaiz.roomapp.helpers.Actions
 
 private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PersonEntity>() {
     override fun areItemsTheSame(oldItem: PersonEntity, newItem: PersonEntity) = oldItem.id == newItem.id
@@ -39,9 +39,6 @@ class PersonAdapter(
         private lateinit var person: PersonEntity
 
         companion object {
-            val ACTION_REMOVE_PERSON = "remove"
-            val ACTION_UPDATE_PERSON = "update"
-
             fun getInstance(
                 onItemClickListener: OnItemClickListener,
                 layoutInflater: LayoutInflater,

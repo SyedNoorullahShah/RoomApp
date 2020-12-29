@@ -1,11 +1,10 @@
-package com.abdulwahabfaiz.roomapp.ui
+package com.abdulwahabfaiz.roomapp.ui.person
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,17 +12,19 @@ import com.abdulwahabfaiz.roomapp.R
 import com.abdulwahabfaiz.roomapp.adapters.OnItemClickListener
 import com.abdulwahabfaiz.roomapp.adapters.PersonAdapter
 import com.abdulwahabfaiz.roomapp.database.PersonEntity
-import com.abdulwahabfaiz.roomapp.databinding.ActivityMainBinding
+import com.abdulwahabfaiz.roomapp.databinding.ActivityPersonBinding
 import com.abdulwahabfaiz.roomapp.helpers.Actions
+import com.abdulwahabfaiz.roomapp.dialogs.AddUpdateDialog
+import com.abdulwahabfaiz.roomapp.dialogs.AddUpdatePersonListener
 
 class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClickListener {
     private lateinit var viewmodel: PersonViewModel
-    private lateinit var activityMainBinding: ActivityMainBinding
+    private lateinit var activityMainBinding: ActivityPersonBinding
     private lateinit var personAdapter: PersonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        activityMainBinding = ActivityPersonBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
         setRecyclerview()
         setSearchViewListener()
@@ -32,8 +33,7 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
                 PersonViewModel::class.java
             )
 
-        viewmodel.personList.observe(this) { persons ->
-            Toast.makeText(this,"here",Toast.LENGTH_SHORT).show()
+        viewmodel.personsList.observe(this) { persons ->
             personAdapter.submitList(persons)
         }
     }
@@ -42,14 +42,13 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
         activityMainBinding.personFinder.setOnQueryTextListener(object :
             SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-
-                var getUserEitherExistOrNot = viewmodel.getPersonsByName(query)
-                Log.d("userExist", "onQueryTextSubmit: $getUserEitherExistOrNot")
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                return false
+
+                viewmodel.getPersonsByName(newText)
+                return true
             }
 
         })

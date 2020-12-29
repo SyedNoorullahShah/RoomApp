@@ -1,58 +1,72 @@
-package com.abdulwahabfaiz.roomapp.ui
+package com.abdulwahabfaiz.roomapp.ui.person
 
 import android.app.Application
-import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.viewModelScope
-import com.abdulwahabfaiz.roomapp.database.PersonDatabase
 import com.abdulwahabfaiz.roomapp.database.PersonEntity
+import com.abdulwahabfaiz.roomapp.repo.Repository
 import kotlinx.coroutines.launch
 
 class PersonViewModel(application: Application) : AndroidViewModel(application) {
-    private val personDao = PersonDatabase.getInstance(application.applicationContext).personDao
-    var personList: LiveData<List<PersonEntity>>
 
-    var userExist: Boolean? = null
-
+    private val repo: Repository = Repository.getInstance(application.applicationContext)
+    private val dbPersonsList: LiveData<List<PersonEntity>> = repo.getPersons()
+    val personsList = MediatorLiveData<List<PersonEntity>>()
+    private lateinit var persons: List<PersonEntity>
+    private var isFilterOn: Boolean = false
 
     init {
-        personList = personDao.getPersons()
+        personsList.addSource(dbPersonsList) {
+            it?.let {
+                if (!isFilterOn) {
+                    personsList.value = it
+                    persons = it
+                }
+            }
+        }
     }
 
     fun addPerson(person: PersonEntity) {
         viewModelScope.launch {
-            personDao.insert(person)
+            repo.addPerson(person)
         }
     }
 
     fun delete(person: PersonEntity) {
         viewModelScope.launch {
-            personDao.delete(person)
+            repo.delete(person)
         }
     }
 
-     fun getPersonsByName(name: String?) {
+    fun getPersonsByName(name: String?) {
         if (name.isNullOrEmpty()) {
-            personList = personDao.getPersons()
+            resetList()
             return
         }
-        //personList = personDao.getPersonsByName(name)
-      // viewModelScope.launch {
-         var runnable = Runnable {
-             userExist = personDao.getPersonsByName(name)
-             Log.d("userexist", "getPersonsByName: $userExist")
-         }
-         AsyncTask.execute(runnable)
 
+        dbPersonsList.value?.let {
+            personsList.value = getListByName(name, it)
+        }
+    }
 
-      //  }
+    private fun getListByName(name: String, list: List<PersonEntity>): List<PersonEntity>? {
+        isFilterOn = true
+        return list.filter {
+            it.name.contains(name)
+        }
+    }
+
+    private fun resetList() {
+        isFilterOn = false
+        personsList.value = persons
     }
 
     fun update(name: String, id: Int) {
         viewModelScope.launch {
-            personDao.update(name, id)
+            repo.update(name, id)
         }
     }
 }

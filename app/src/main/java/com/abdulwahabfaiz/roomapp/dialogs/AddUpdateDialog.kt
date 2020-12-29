@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp.ui
+package com.abdulwahabfaiz.roomapp.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.abdulwahabfaiz.roomapp.databinding.PersonDialogBinding
 import com.abdulwahabfaiz.roomapp.helpers.Actions
+import com.abdulwahabfaiz.roomapp.ui.person.PersonActivity
 
 interface AddUpdatePersonListener {
     fun addUpdatePerson(actions: Actions, name: String, int: Int)
