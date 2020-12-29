@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity">
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/person_finder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:queryHint="search.." />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/person_list"
+        tools:listitem="@layout/person_item"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
