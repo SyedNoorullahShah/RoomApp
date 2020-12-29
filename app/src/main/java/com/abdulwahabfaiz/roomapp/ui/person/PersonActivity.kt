@@ -10,13 +10,13 @@ import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdulwahabfaiz.roomapp.R
-import com.abdulwahabfaiz.roomapp.ui.adapters.OnItemClickListener
-import com.abdulwahabfaiz.roomapp.ui.adapters.PersonAdapter
+import com.abdulwahabfaiz.roomapp.adapters.OnItemClickListener
+import com.abdulwahabfaiz.roomapp.adapters.PersonAdapter
 import com.abdulwahabfaiz.roomapp.database.PersonEntity
 import com.abdulwahabfaiz.roomapp.databinding.ActivityMainBinding
-import com.abdulwahabfaiz.roomapp.enums.Actions
+import com.abdulwahabfaiz.roomapp.helpers.Actions
 
-class MainActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClickListener {
+class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClickListener {
     private lateinit var viewmodel: PersonViewModel
     private lateinit var activityMainBinding: ActivityMainBinding
     private lateinit var personAdapter: PersonAdapter

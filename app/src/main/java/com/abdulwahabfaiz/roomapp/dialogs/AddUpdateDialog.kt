@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.abdulwahabfaiz.roomapp.databinding.PersonDialogBinding
-import com.abdulwahabfaiz.roomapp.enums.Actions
+import com.abdulwahabfaiz.roomapp.helpers.Actions
 
 interface AddUpdatePersonListener {
     fun addUpdatePerson(actions: Actions, name: String, int: Int)
@@ -20,7 +20,7 @@ class AddUpdateDialog : DialogFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        addUpdatePersonListener = context as MainActivity
+        addUpdatePersonListener = context as PersonActivity
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
