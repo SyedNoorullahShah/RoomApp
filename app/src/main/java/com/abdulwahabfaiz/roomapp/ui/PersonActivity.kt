@@ -30,16 +30,22 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
 
         setRecyclerview()
         setSearchViewListener()
-
+        activityMainBinding.fabBtnAdd.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("ACTION", Actions.ACTION_ADD.name)
+            startDialog(bundle)
+        }
 
         viewmodel =
             ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
                 PersonViewModel::class.java
             )
 
-        viewmodel.personsList.observe(this) { persons ->
-            personAdapter.submitList(persons)
-            personAdapter.fullList.addAll(persons)
+
+        viewmodel.personsList.observe(this) { personsList ->
+            personAdapter.fullList = personsList
+            personAdapter.filter.filter(activityMainBinding.personFinder.query.toString())
+
         }
     }
 
@@ -50,7 +56,7 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
                 return false
             }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
+            override fun onQueryTextChange(newText: String): Boolean {
                 personAdapter.filter.filter(newText)
                 return false
             }
@@ -71,10 +77,7 @@ class PersonActivity : AppCompatActivity(), AddUpdatePersonListener, OnItemClick
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val bundle = Bundle()
-        bundle.putString("ACTION", Actions.ACTION_ADD.name)
-        startDialog(bundle)
-        return true
+        return false
     }
 
     override fun addUpdatePerson(a: Actions, name: String, id: Int) {
