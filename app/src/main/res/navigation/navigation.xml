@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/listFilterFragment">
+    <fragment
+        android:id="@+id/listFilterFragment"
+        android:name="com.abdulwahabfaiz.roomapp.ui.list_filter.ListFilterFragment"
+        tools:layout="@layout/list_filter_fragment"
+        android:label="ListFilterFragment" />
+    <fragment
+        android:id="@+id/databaseFilterFragment"
+        tools:layout="@layout/db_filter_fragment"
+        android:name="com.abdulwahabfaiz.roomapp.ui.db_filter.DatabaseFilterFragment"
+        android:label="DatabaseFilterFragment" />
 </navigation>

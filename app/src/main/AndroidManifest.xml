@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RoomApp">
-        <activity android:name=".ui.person.PersonActivity">
+        <activity android:name=".ui.PersonActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

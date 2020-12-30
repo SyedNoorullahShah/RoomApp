@@ -18,8 +18,9 @@ interface PersonDao {
     @Query("SELECT * FROM persons_table")
     fun getPersons(): LiveData<List<PersonEntity>>
 
-    @Query("SELECT * FROM persons_table WHERE name=:name")
-     fun getPersonsByName(name: String): Boolean
+    @Query("SELECT * FROM persons_table WHERE name LIKE :name")
+    fun getPersonsByName(name: String): LiveData<List<PersonEntity>>
+
 }
 
 @Database(entities = [PersonEntity::class], version = 1, exportSchema = false)

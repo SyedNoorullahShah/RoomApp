@@ -12,10 +12,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class Repository private constructor(private val personDao: PersonDao) {
-    /*private val _personsList = MutableLiveData<List<PersonEntity>>()
-    val personsList: LiveData<List<PersonEntity>>
-        get() = _personsList
-    */
 
     companion object {
         private var repository: Repository? = null
@@ -29,7 +25,12 @@ class Repository private constructor(private val personDao: PersonDao) {
         private fun buildRepo(personDao: PersonDao): Repository = Repository(personDao)
     }
 
-    fun getPersons(): LiveData<List<PersonEntity>> = personDao.getPersons()
+    fun getPersons() = personDao.getPersons()
+
+    fun getPersonsByName(name: String):LiveData<List<PersonEntity>>{
+        val search = "%$name%"
+        return personDao.getPersonsByName(search)
+    }
 
     suspend fun addPerson(person: PersonEntity) {
         withContext(Dispatchers.IO) {

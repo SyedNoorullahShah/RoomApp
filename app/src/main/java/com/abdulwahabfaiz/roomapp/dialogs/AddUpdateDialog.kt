@@ -2,13 +2,14 @@ package com.abdulwahabfaiz.roomapp.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import com.abdulwahabfaiz.roomapp.databinding.PersonDialogBinding
 import com.abdulwahabfaiz.roomapp.helpers.Actions
-import com.abdulwahabfaiz.roomapp.ui.person.PersonActivity
+import com.abdulwahabfaiz.roomapp.ui.list_filter.ListFilterFragment
 
 interface AddUpdatePersonListener {
     fun addUpdatePerson(actions: Actions, name: String, int: Int)
@@ -19,15 +20,11 @@ class AddUpdateDialog : DialogFragment() {
 
     private lateinit var addUpdatePersonListener: AddUpdatePersonListener
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        addUpdatePersonListener = context as PersonActivity
-    }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialogBuilder = AlertDialog.Builder(activity)
-        val binding = PersonDialogBinding.inflate(activity!!.layoutInflater)
-
+        val dialogBuilder = AlertDialog.Builder(context)
+        val binding = PersonDialogBinding.inflate(layoutInflater)
+        addUpdatePersonListener = targetFragment as ListFilterFragment
         dialogBuilder.setView(binding.root)
             .setTitle(getTitle())
             .setNegativeButton("cancel") { dialog, which -> }

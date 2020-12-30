@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:id="@+id/add_item"
-    app:showAsAction="ifRoom"
-    android:icon="@drawable/add_person"/>
+    <item
+        android:id="@+id/databaseFilterFragment"
+        android:title="Search from Database" />
 </menu>
