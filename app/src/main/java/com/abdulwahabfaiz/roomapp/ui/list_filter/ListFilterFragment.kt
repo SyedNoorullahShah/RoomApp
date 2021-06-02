@@ -45,7 +45,7 @@ class ListFilterFragment : Fragment(), AddUpdatePersonListener, OnItemClickListe
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         listFilterFragmentBinding = ListFilterFragmentBinding.inflate(inflater, container, false)
         setHasOptionsMenu(true)
         viewmodel.personsList.observe(viewLifecycleOwner) { personsList ->

@@ -1,6 +1,5 @@
 package com.abdulwahabfaiz.roomapp.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abdulwahabfaiz.roomapp.database.PersonEntity
 import com.abdulwahabfaiz.roomapp.databinding.PersonItemBinding
 import com.abdulwahabfaiz.roomapp.helpers.Actions
+import java.util.*
 
 private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PersonEntity>() {
     override fun areItemsTheSame(oldItem: PersonEntity, newItem: PersonEntity) =
@@ -88,9 +88,10 @@ class PersonAdapter(
     }
 
     private val filter = object : Filter() {
+        private var filteredList: List<PersonEntity>? = null
 
         override fun performFiltering(name: CharSequence?): FilterResults {
-            val filteredList = getFilteredList(name)
+            filteredList = getFilteredList(name)
 
             val results = FilterResults()
             results.values = filteredList
@@ -100,10 +101,9 @@ class PersonAdapter(
 
         private fun getFilteredList(name: CharSequence?) =
             if (name.isNullOrEmpty()) {
-                Log.d("noor", "EMPTY NAME: $fullList")
                 fullList
             } else {
-                val filterQuery = name.toString().toLowerCase().trim()
+                val filterQuery = name.toString().toLowerCase(Locale.getDefault()).trim()
 
                 fullList.filter {
                     it.name.contains(filterQuery)
@@ -111,6 +111,7 @@ class PersonAdapter(
             }
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults) {
+            if (results.values !== filteredList) results.values = filteredList
             submitList(results.values as List<PersonEntity>)
         }
 

@@ -37,7 +37,7 @@ class DatabaseFilterFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         dbFilterFragmentBinding = DbFilterFragmentBinding.inflate(inflater, container, false)
         viewmodel.personsList.observe(viewLifecycleOwner, { personsList ->
             personAdapter.submitList(personsList)
