@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp.database
+package com.android.roomapp.database
 
 import android.content.Context
 import androidx.lifecycle.LiveData

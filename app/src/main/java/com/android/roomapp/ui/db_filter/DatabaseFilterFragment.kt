@@ -1,36 +1,32 @@
-package com.abdulwahabfaiz.roomapp.ui.db_filter
+package com.android.roomapp.ui.db_filter
 
-import android.app.Application
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abdulwahabfaiz.roomapp.adapters.PersonAdapter
-import com.abdulwahabfaiz.roomapp.databinding.DbFilterFragmentBinding
-import com.abdulwahabfaiz.roomapp.ui.PersonActivity
+import com.android.roomapp.RoomApp
+import com.android.roomapp.adapters.PersonAdapter
+import com.android.roomapp.databinding.DbFilterFragmentBinding
+import com.android.roomapp.ui.PersonActivity
+import javax.inject.Inject
 
 class DatabaseFilterFragment : Fragment() {
-    private lateinit var personAdapter: PersonAdapter
-    private lateinit var viewmodel: DatabaseFilterViewModel
-    private lateinit var dbFilterFragmentBinding: DbFilterFragmentBinding
-    private lateinit var application: Application
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        application = (context as PersonActivity).application
-    }
+    @Inject
+    lateinit var viewmodel: DatabaseFilterViewModel
+    private lateinit var dbFilterFragmentBinding: DbFilterFragmentBinding
+    private lateinit var personAdapter: PersonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val app = (context as PersonActivity).application
         super.onCreate(savedInstanceState)
-        viewmodel =
-            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
-                DatabaseFilterViewModel::class.java
-            )
+        (app as RoomApp).appComponent
+            .getViewComponentFactory()
+            .create(owner = this)
+            .inject(this)
     }
 
     override fun onCreateView(

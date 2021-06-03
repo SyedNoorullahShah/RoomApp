@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp
+package com.android.roomapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

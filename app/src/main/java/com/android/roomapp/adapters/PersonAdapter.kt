@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp.adapters
+package com.android.roomapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +8,9 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.abdulwahabfaiz.roomapp.database.PersonEntity
-import com.abdulwahabfaiz.roomapp.databinding.PersonItemBinding
-import com.abdulwahabfaiz.roomapp.helpers.Actions
+import com.android.roomapp.database.PersonEntity
+import com.android.roomapp.databinding.PersonItemBinding
+import com.android.roomapp.helpers.Actions
 import java.util.*
 
 private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PersonEntity>() {

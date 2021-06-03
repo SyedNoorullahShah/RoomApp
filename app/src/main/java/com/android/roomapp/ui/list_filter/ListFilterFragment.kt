@@ -1,43 +1,38 @@
-package com.abdulwahabfaiz.roomapp.ui.list_filter
+package com.android.roomapp.ui.list_filter
 
-import android.app.Application
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abdulwahabfaiz.roomapp.R
-import com.abdulwahabfaiz.roomapp.adapters.OnItemClickListener
-import com.abdulwahabfaiz.roomapp.adapters.PersonAdapter
-import com.abdulwahabfaiz.roomapp.database.PersonEntity
-import com.abdulwahabfaiz.roomapp.databinding.ListFilterFragmentBinding
-import com.abdulwahabfaiz.roomapp.dialogs.AddUpdateDialog
-import com.abdulwahabfaiz.roomapp.dialogs.AddUpdatePersonListener
-import com.abdulwahabfaiz.roomapp.helpers.Actions
-import com.abdulwahabfaiz.roomapp.ui.PersonActivity
+import com.android.roomapp.R
+import com.android.roomapp.RoomApp
+import com.android.roomapp.adapters.OnItemClickListener
+import com.android.roomapp.adapters.PersonAdapter
+import com.android.roomapp.database.PersonEntity
+import com.android.roomapp.databinding.ListFilterFragmentBinding
+import com.android.roomapp.dialogs.AddUpdateDialog
+import com.android.roomapp.dialogs.AddUpdatePersonListener
+import com.android.roomapp.helpers.Actions
+import com.android.roomapp.ui.PersonActivity
+import javax.inject.Inject
 
 class ListFilterFragment : Fragment(), AddUpdatePersonListener, OnItemClickListener {
-    private lateinit var viewmodel: ListFilterViewModel
+    @Inject
+    lateinit var viewmodel: ListFilterViewModel
     private lateinit var listFilterFragmentBinding: ListFilterFragmentBinding
     private lateinit var personAdapter: PersonAdapter
-    private lateinit var application: Application
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        application = (context as PersonActivity).application
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val app = (context as PersonActivity).application
         super.onCreate(savedInstanceState)
+        (app as RoomApp).appComponent
+            .getViewComponentFactory()
+            .create(owner = this)
+            .inject(this)
 
-        viewmodel =
-            ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application)).get(
-                ListFilterViewModel::class.java
-            )
     }
 
 
@@ -98,7 +93,10 @@ class ListFilterFragment : Fragment(), AddUpdatePersonListener, OnItemClickListe
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, findNavController())||super.onOptionsItemSelected(item)
+        return NavigationUI.onNavDestinationSelected(
+            item,
+            findNavController()
+        ) || super.onOptionsItemSelected(item)
     }
 
     override fun addUpdatePerson(a: Actions, name: String, id: Int) {
@@ -125,7 +123,7 @@ class ListFilterFragment : Fragment(), AddUpdatePersonListener, OnItemClickListe
         val dialog = AddUpdateDialog().apply {
             arguments = bundle
         }
-        dialog.setTargetFragment(this,0)
+        dialog.setTargetFragment(this, 0)
         dialog.show(parentFragmentManager, "PERSON_DIALOG")
     }
 

@@ -1,15 +1,13 @@
-package com.abdulwahabfaiz.roomapp.dialogs
+package com.android.roomapp.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import com.abdulwahabfaiz.roomapp.databinding.PersonDialogBinding
-import com.abdulwahabfaiz.roomapp.helpers.Actions
-import com.abdulwahabfaiz.roomapp.ui.list_filter.ListFilterFragment
+import com.android.roomapp.databinding.PersonDialogBinding
+import com.android.roomapp.helpers.Actions
+import com.android.roomapp.ui.list_filter.ListFilterFragment
 
 interface AddUpdatePersonListener {
     fun addUpdatePerson(actions: Actions, name: String, int: Int)

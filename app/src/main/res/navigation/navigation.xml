@@ -6,12 +6,12 @@
     app:startDestination="@id/listFilterFragment">
     <fragment
         android:id="@+id/listFilterFragment"
-        android:name="com.abdulwahabfaiz.roomapp.ui.list_filter.ListFilterFragment"
+        android:name="com.android.roomapp.ui.list_filter.ListFilterFragment"
         tools:layout="@layout/list_filter_fragment"
         android:label="ListFilterFragment" />
     <fragment
         android:id="@+id/databaseFilterFragment"
         tools:layout="@layout/db_filter_fragment"
-        android:name="com.abdulwahabfaiz.roomapp.ui.db_filter.DatabaseFilterFragment"
+        android:name="com.android.roomapp.ui.db_filter.DatabaseFilterFragment"
         android:label="DatabaseFilterFragment" />
 </navigation>
