@@ -1,11 +1,14 @@
-package com.abdulwahabfaiz.roomapp.ui.list_filter
+package com.android.roomapp.ui.list_filter
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.abdulwahabfaiz.roomapp.database.PersonEntity
-import com.abdulwahabfaiz.roomapp.repo.Repository
+import com.android.roomapp.database.PersonEntity
+import com.android.roomapp.repo.Repository
 import kotlinx.coroutines.launch
 
+/**
+A [ViewModel] required for storing persons list for [ListFilterFragment] and for performing basic database operations on its behalf.
+ */
 class ListFilterViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repo: Repository = Repository.getInstance(application.applicationContext)

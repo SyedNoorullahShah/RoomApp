@@ -1,9 +1,12 @@
-package com.abdulwahabfaiz.roomapp.ui
+package com.android.roomapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.abdulwahabfaiz.roomapp.databinding.ActivityPersonBinding
+import com.android.roomapp.databinding.ActivityPersonBinding
 
+/**
+Host activity for both the fragments (i.e ListFilterFragment and DatabaseFilterFragment).
+ */
 class PersonActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

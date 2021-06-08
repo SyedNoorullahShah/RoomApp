@@ -1,21 +1,25 @@
-package com.abdulwahabfaiz.roomapp.dialogs
+package com.android.roomapp.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
-import com.abdulwahabfaiz.roomapp.databinding.PersonDialogBinding
-import com.abdulwahabfaiz.roomapp.helpers.Actions
-import com.abdulwahabfaiz.roomapp.ui.list_filter.ListFilterFragment
+import com.android.roomapp.databinding.PersonDialogBinding
+import com.android.roomapp.helpers.Actions
+import com.android.roomapp.ui.list_filter.ListFilterFragment
 
 interface AddUpdatePersonListener {
+    //responsible for adding/updating entry in the PersonDatabase.
     fun addUpdatePerson(actions: Actions, name: String, int: Int)
 }
 
-
+/**
+A dialog instantiated from [ListFilterFragment] containing an EditText field, which lets us
+1. add a new name to our PersonDatabase.
+2. update an existing name in our PersonDatabase.
+3. invokes [AddUpdatePersonListener] callback implemented by [ListFilterFragment]
+ */
 class AddUpdateDialog : DialogFragment() {
 
     private lateinit var addUpdatePersonListener: AddUpdatePersonListener
@@ -27,10 +31,10 @@ class AddUpdateDialog : DialogFragment() {
         addUpdatePersonListener = targetFragment as ListFilterFragment
         dialogBuilder.setView(binding.root)
             .setTitle(getTitle())
-            .setNegativeButton("cancel") { dialog, which -> }
+            .setNegativeButton("cancel") { _, _ -> }
             .setPositiveButton(
                 "ok"
-            ) { dialog, which ->
+            ) { _, _ ->
                 val name = binding.personEditName.text.toString()
 
                 if (name.isEmpty()) {

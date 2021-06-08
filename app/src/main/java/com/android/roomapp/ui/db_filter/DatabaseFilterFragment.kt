@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp.ui.db_filter
+package com.android.roomapp.ui.db_filter
 
 import android.app.Application
 import android.content.Context
@@ -10,9 +10,14 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abdulwahabfaiz.roomapp.adapters.PersonAdapter
-import com.abdulwahabfaiz.roomapp.databinding.DbFilterFragmentBinding
-import com.abdulwahabfaiz.roomapp.ui.PersonActivity
+import com.android.roomapp.adapters.PersonAdapter
+import com.android.roomapp.databinding.DbFilterFragmentBinding
+import com.android.roomapp.ui.PersonActivity
+
+/**
+This is the screen where we will be able to filter results DIRECTLY FROM DATABASE.
+It means whenever the user searches for a name, the filter operation will be performed ON THE DATABASE LEVEL and the generated result will be returned via LiveData
+ */
 
 class DatabaseFilterFragment : Fragment() {
     private lateinit var personAdapter: PersonAdapter

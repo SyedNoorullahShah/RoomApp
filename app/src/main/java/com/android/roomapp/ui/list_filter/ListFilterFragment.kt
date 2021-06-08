@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp.ui.list_filter
+package com.android.roomapp.ui.list_filter
 
 import android.app.Application
 import android.content.Context
@@ -10,16 +10,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.abdulwahabfaiz.roomapp.R
-import com.abdulwahabfaiz.roomapp.adapters.OnItemClickListener
-import com.abdulwahabfaiz.roomapp.adapters.PersonAdapter
-import com.abdulwahabfaiz.roomapp.database.PersonEntity
-import com.abdulwahabfaiz.roomapp.databinding.ListFilterFragmentBinding
-import com.abdulwahabfaiz.roomapp.dialogs.AddUpdateDialog
-import com.abdulwahabfaiz.roomapp.dialogs.AddUpdatePersonListener
-import com.abdulwahabfaiz.roomapp.helpers.Actions
-import com.abdulwahabfaiz.roomapp.ui.PersonActivity
+import com.android.roomapp.R
+import com.android.roomapp.adapters.OnItemClickListener
+import com.android.roomapp.adapters.PersonAdapter
+import com.android.roomapp.database.PersonEntity
+import com.android.roomapp.databinding.ListFilterFragmentBinding
+import com.android.roomapp.dialogs.AddUpdateDialog
+import com.android.roomapp.dialogs.AddUpdatePersonListener
+import com.android.roomapp.helpers.Actions
+import com.android.roomapp.ui.PersonActivity
 
+/**
+This is the screen where we will be able to filter results FROM RECYCLER VIEW'S ARRAY LIST.
+It means whenever the user searches for a name, the filter operation will be performed ON THE ADAPTER'S DATA and the generated result will be returned via LiveData
+Moreover we will be able to add,edit and remove data as well.
+ */
 class ListFilterFragment : Fragment(), AddUpdatePersonListener, OnItemClickListener {
     private lateinit var viewmodel: ListFilterViewModel
     private lateinit var listFilterFragmentBinding: ListFilterFragmentBinding

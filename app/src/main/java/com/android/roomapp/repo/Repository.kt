@@ -1,16 +1,16 @@
-package com.abdulwahabfaiz.roomapp.repo
+package com.android.roomapp.repo
 
-import android.app.Person
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.abdulwahabfaiz.roomapp.database.PersonDao
-import com.abdulwahabfaiz.roomapp.database.PersonDatabase
-import com.abdulwahabfaiz.roomapp.database.PersonEntity
+import com.android.roomapp.database.PersonDao
+import com.android.roomapp.database.PersonDatabase
+import com.android.roomapp.database.PersonEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+/**
+Simple repository (singleton) class which acts as a medium between both the viewmodels and the data source (i.e our PersonDatabase)
+ */
 class Repository private constructor(private val personDao: PersonDao) {
 
     companion object {

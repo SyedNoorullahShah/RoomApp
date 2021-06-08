@@ -1,4 +1,4 @@
-package com.abdulwahabfaiz.roomapp
+package com.android.roomapp
 
 import org.junit.Test
 
