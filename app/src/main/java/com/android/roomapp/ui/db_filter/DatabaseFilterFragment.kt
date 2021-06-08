@@ -9,9 +9,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.roomapp.RoomApp
 import com.android.roomapp.adapters.PersonAdapter
+import com.android.roomapp.dagger.AppComponent
 import com.android.roomapp.databinding.DbFilterFragmentBinding
 import com.android.roomapp.ui.PersonActivity
 import javax.inject.Inject
+
+/**
+This is the screen where we will be able to filter results DIRECTLY FROM DATABASE.
+It means whenever the user searches for a name, the filter operation will be performed ON THE DATABASE LEVEL and the generated result will be returned via LiveData
+ */
 
 class DatabaseFilterFragment : Fragment() {
 
@@ -20,11 +26,14 @@ class DatabaseFilterFragment : Fragment() {
     private lateinit var dbFilterFragmentBinding: DbFilterFragmentBinding
     private lateinit var personAdapter: PersonAdapter
 
+    /**
+    Instantiating [FragmentComponent] and using it to inject dependency (i.e [DatabaseFilterViewModel]).
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         val app = (context as PersonActivity).application
         super.onCreate(savedInstanceState)
         (app as RoomApp).appComponent
-            .getViewComponentFactory()
+            .getFragmentComponentFactory()
             .create(owner = this)
             .inject(this)
     }

@@ -17,19 +17,28 @@ import com.android.roomapp.dialogs.AddUpdateDialog
 import com.android.roomapp.dialogs.AddUpdatePersonListener
 import com.android.roomapp.helpers.Actions
 import com.android.roomapp.ui.PersonActivity
+import com.android.roomapp.ui.db_filter.DatabaseFilterViewModel
 import javax.inject.Inject
 
+/**
+This is the screen where we will be able to filter results FROM RECYCLER VIEW'S ARRAY LIST.
+It means whenever the user searches for a name, the filter operation will be performed ON THE ADAPTER'S DATA and the generated result will be returned via LiveData
+Moreover we will be able to add,edit and remove data as well.
+ */
 class ListFilterFragment : Fragment(), AddUpdatePersonListener, OnItemClickListener {
     @Inject
     lateinit var viewmodel: ListFilterViewModel
     private lateinit var listFilterFragmentBinding: ListFilterFragmentBinding
     private lateinit var personAdapter: PersonAdapter
 
+    /**
+    Instantiating [FragmentComponent] and using it to inject dependency (i.e [ListFilterViewModel]).
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         val app = (context as PersonActivity).application
         super.onCreate(savedInstanceState)
         (app as RoomApp).appComponent
-            .getViewComponentFactory()
+            .getFragmentComponentFactory()
             .create(owner = this)
             .inject(this)
 

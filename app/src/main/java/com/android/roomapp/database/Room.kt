@@ -1,8 +1,12 @@
 package com.android.roomapp.database
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
+
+/**
+[Dao] interface definition which shows all the database operations performed by our app.
+Methods will be implemented automatically.
+ */
 
 @Dao
 interface PersonDao {
@@ -23,26 +27,13 @@ interface PersonDao {
 
 }
 
+
+/**
+An abstract [RoomDatabase] class which will be implemented automatically.
+We'll be able to use [PersonDao] instance for performing database operations.
+ */
+
 @Database(entities = [PersonEntity::class], version = 1, exportSchema = false)
 abstract class PersonDatabase : RoomDatabase() {
     abstract val personDao: PersonDao
-
-    companion object {
-        private lateinit var INSTANCE: PersonDatabase
-
-        fun getInstance(context: Context): PersonDatabase {
-            synchronized(this) {
-                if (!Companion::INSTANCE.isInitialized) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        PersonDatabase::class.java,
-                        "persons"
-                    ).fallbackToDestructiveMigration().build()
-                }
-            }
-
-            return INSTANCE
-        }
-    }
-
 }

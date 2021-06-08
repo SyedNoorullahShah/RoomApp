@@ -8,9 +8,11 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
+/**
+Simple repository (singleton) class which acts as a medium between both the viewmodels and the data source (i.e our PersonDatabase)
+*/
 @Singleton
 class Repository @Inject constructor(private val personDao: PersonDao) {
-
     fun getPersons() = personDao.getPersons()
 
     fun getPersonsByName(name: String): LiveData<List<PersonEntity>> {

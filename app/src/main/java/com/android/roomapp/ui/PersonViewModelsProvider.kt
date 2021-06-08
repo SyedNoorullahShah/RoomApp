@@ -6,8 +6,15 @@ import com.android.roomapp.repo.Repository
 import com.android.roomapp.ui.db_filter.DatabaseFilterViewModel
 import com.android.roomapp.ui.list_filter.ListFilterViewModel
 
+
+/**
+Our custom [ViewModelProvider.Factory] implementation for enabling constructor injection
+for our viewmodels (letting them take repository instance as the constructor argument).
+ */
+
 class PersonViewModelsProvider(
-    private val repository: Repository) :
+    private val repository: Repository
+) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
         when {

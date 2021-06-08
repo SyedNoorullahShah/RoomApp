@@ -10,27 +10,29 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Named
 
-@Module
-abstract class ViewModelModule {
-    companion object {
-        @Provides
-        @ViewModelScope
-        fun provideListFilterViewModel(
-            @Named(LIFECYCLE_OWNER) owner: Fragment,
-            repository: Repository
-        ) =
-            ViewModelProvider(owner, PersonViewModelsProvider(repository)).get(
-                ListFilterViewModel::class.java
-            )
+/**
+A [Module] responsible for creating and providing 'ListFilterViewModel' and 'DatabaseFilterViewModel' instances.
+ */
 
-        @Provides
-        @ViewModelScope
-        fun provideDatabaseFilterViewModel(
-            @Named(LIFECYCLE_OWNER) owner: Fragment,
-            repository: Repository
-        ) =
-            ViewModelProvider(owner, PersonViewModelsProvider(repository)).get(
-                DatabaseFilterViewModel::class.java
-            )
-    }
+@Module
+object ViewModelModule {
+    @Provides
+    @FragmentScope
+    fun provideListFilterViewModel(
+        @Named(LIFECYCLE_OWNER) owner: Fragment,
+        repository: Repository
+    ) =
+        ViewModelProvider(owner, PersonViewModelsProvider(repository)).get(
+            ListFilterViewModel::class.java
+        )
+
+    @Provides
+    @FragmentScope
+    fun provideDatabaseFilterViewModel(
+        @Named(LIFECYCLE_OWNER) owner: Fragment,
+        repository: Repository
+    ) =
+        ViewModelProvider(owner, PersonViewModelsProvider(repository)).get(
+            DatabaseFilterViewModel::class.java
+        )
 }

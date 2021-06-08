@@ -2,12 +2,15 @@ package com.android.roomapp.ui.list_filter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.roomapp.dagger.ViewModelScope
+import com.android.roomapp.dagger.FragmentScope
 import com.android.roomapp.database.PersonEntity
 import com.android.roomapp.repo.Repository
 import kotlinx.coroutines.launch
 
-@ViewModelScope
+/**
+ A [ViewModel] required for storing persons list for [ListFilterFragment] and for performing basic database operations on its behalf.
+*/
+@FragmentScope
 class ListFilterViewModel(private val repo: Repository) : ViewModel() {
 
     val personsList = repo.getPersons()
