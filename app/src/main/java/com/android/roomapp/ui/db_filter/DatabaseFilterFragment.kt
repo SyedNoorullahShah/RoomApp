@@ -19,7 +19,7 @@ It means whenever the user searches for a name, the filter operation will be per
 
 @AndroidEntryPoint
 class DatabaseFilterFragment : Fragment() {
-    val viewModel by viewModels<DatabaseFilterViewModel>()
+    private val viewModel by viewModels<DatabaseFilterViewModel>()
     private lateinit var dbFilterFragmentBinding: DbFilterFragmentBinding
     private lateinit var personAdapter: PersonAdapter
 

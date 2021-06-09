@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
 A [ViewModel] required for storing persons list for [ListFilterFragment] and for performing basic database operations on its behalf.
  */
-@HiltViewModel
+@HiltViewModel      //please refer to the official doc to understand this annotation (https://dagger.dev/hilt/view-model)
 class ListFilterViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
 
     val personsList = repo.getPersons()

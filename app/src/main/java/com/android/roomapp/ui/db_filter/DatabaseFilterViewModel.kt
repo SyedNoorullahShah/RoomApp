@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
 A [ViewModel] required for performing search operations directly on the Database level and storing the result list for [DatabaseFilterFragment].
  */
-@HiltViewModel
+@HiltViewModel      //please refer to the official doc to understand this annotation (https://dagger.dev/hilt/view-model)
 class DatabaseFilterViewModel @Inject constructor(repo: Repository) : ViewModel() {
     private val filterSearch = MutableLiveData("")
     val personsList = Transformations.switchMap(filterSearch) { filterQuery ->
