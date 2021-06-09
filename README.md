@@ -19,3 +19,4 @@ For the sake of simplicity, this app contains the following functionalities:-
      - The search will happen on the already generated (RecyclerView's) list (ArrayList)
      - The search will happen directly on the database level (Room SQLite)
 ## Simple Walkthrough
+https://user-images.githubusercontent.com/70072437/121355087-f9c1fb80-c948-11eb-8c85-cb1464b03bea.mp4
