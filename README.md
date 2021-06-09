@@ -7,7 +7,8 @@ The major ones being:-
 2. ViewModel and LiveData
 3. Navigation Components
 4. Room SQLite
-5. Dependency Injection using [Dagger2](https://developer.android.com/training/dependency-injection/dagger-android) and [Dagger-Hilt](https://dagger.dev/hilt/).
+5. MVVM architecture
+6. Dependency Injection using [Dagger2](https://developer.android.com/training/dependency-injection/dagger-android) and [Dagger-Hilt](https://dagger.dev/hilt/).
 
 **(Note: Dependency injection is NOT DONE in the _master_ branch. While the _dagger2_ and the _dagger-hilt_ branches contain code with dependency injection implemented using the libraries with the corresponding branch names.)**
  
