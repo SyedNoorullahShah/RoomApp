@@ -9,7 +9,7 @@ The major ones being:-
 4. Room SQLite
 5. Dependency Injection using [Dagger2](https://developer.android.com/training/dependency-injection/dagger-android) and [Dagger-Hilt](https://dagger.dev/hilt/).
 
-**(Note: Dependency injection,in this branch, is using the _Dagger-Hilt_ library.)**
+**(Note: Dependency injection,in this branch, is done using the _Dagger-Hilt_ library.)**
  
 ### Basic app functionalities:-
 For the sake of simplicity, this app contains the following functionalities:-
