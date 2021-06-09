@@ -1,33 +1,22 @@
 package com.android.roomapp.repo
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import com.android.roomapp.database.PersonDao
-import com.android.roomapp.database.PersonDatabase
 import com.android.roomapp.database.PersonEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
 Simple repository (singleton) class which acts as a medium between both the viewmodels and the data source (i.e our PersonDatabase)
  */
-class Repository private constructor(private val personDao: PersonDao) {
-
-    companion object {
-        private var repository: Repository? = null
-
-        fun getInstance(context: Context): Repository =
-            repository
-                ?: buildRepo(PersonDatabase.getInstance(context.applicationContext).personDao).also {
-                    repository = it
-                }
-
-        private fun buildRepo(personDao: PersonDao): Repository = Repository(personDao)
-    }
+@Singleton
+class Repository @Inject constructor(private val personDao: PersonDao) {
 
     fun getPersons() = personDao.getPersons()
 
-    fun getPersonsByName(name: String):LiveData<List<PersonEntity>>{
+    fun getPersonsByName(name: String): LiveData<List<PersonEntity>> {
         val search = "%$name%"
         return personDao.getPersonsByName(search)
     }

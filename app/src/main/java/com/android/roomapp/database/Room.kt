@@ -26,23 +26,4 @@ interface PersonDao {
 @Database(entities = [PersonEntity::class], version = 1, exportSchema = false)
 abstract class PersonDatabase : RoomDatabase() {
     abstract val personDao: PersonDao
-
-    companion object {
-        private lateinit var INSTANCE: PersonDatabase
-
-        fun getInstance(context: Context): PersonDatabase {
-            synchronized(this) {
-                if (!Companion::INSTANCE.isInitialized) {
-                    INSTANCE = Room.databaseBuilder(
-                        context.applicationContext,
-                        PersonDatabase::class.java,
-                        "persons"
-                    ).fallbackToDestructiveMigration().build()
-                }
-            }
-
-            return INSTANCE
-        }
-    }
-
 }
