@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 /**
 This is the screen where we will be able to filter results FROM RECYCLER VIEW'S ARRAY LIST.
-It means whenever the user searches for a name, the filter operation will be performed ON THE ADAPTER'S DATA and the generated result will be returned via LiveData
+It means whenever the user searches for a name, the filter operation will be performed ON THE ADAPTER'S DATA
 Moreover we will be able to add,edit and remove data as well.
  */
 class ListFilterFragment : Fragment(), AddUpdatePersonListener, OnItemClickListener {
